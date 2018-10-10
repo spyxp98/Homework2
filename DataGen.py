@@ -65,7 +65,7 @@ if __name__ == '__main__':
     # 
     # createFile(genData(cos, 0, 4, 100, False), "Cos")
     # createFile(genData(cos, 0, 4, 100, True), "Cos(Rand)")
-    createFile(genData(exp, -1, 1, 100, False), "Exp")
+    createFile(genData(exp, -1, 1, 1000, False), "Exp")
     # createFile(genData(exp, -10, 10, 100, True), "Exp(Rand)")
     # createFile(genData(rtl, -10, 10, 100, False), "Rtl")
     # createFile(genData(rtl, -10, 10, 10000, True), "Rtl(Rand)")
