@@ -7,40 +7,34 @@ import matplotlib
 import matplotlib.pyplot as plt
 from os import path
 
-rtl = lambda x: (x**3 + 2*x**2 - x + 1)/(x**2 - 2*x**2 + 1)
-poly = lambda x: x**3 + 2*x**2 - x + 1
+rtl = lambda x: (x**5 + 2*x**4 - 10 * x **2 + x + 1)/(x**6 - 1)
+poly = lambda x: x**5 + 2*x**4 - 10 * x **2 + x + 1
 exp = math.exp
 cos = math.cos
 functions = [rtl, poly, exp, cos]
 
-def floatRange(min, max, steps, rand):
-    x = []
-    step = (max - min)/steps
-    for i in range(steps):
-        if not rand:
-            currX = min + i*step
-        else:
-            currX = random.uniform(min, max)
+def chebPolZeros(n):
+    x_k = []
+    for i in range(n):
+        x_k.append(math.cos(math.pi * (i + 0.5) / n))
+    return x_k
 
-        x.append(currX)
-    
+def xRange(N):
+    x = []
+    x = chebPolZeros(N)
     return x
 
 
-def genData(func, min, max, steps, rand):
+def genData(func, x):
     y = {}
-    for x in floatRange(min, max, steps, rand):
-        try:
-            y[x] = func(x)
-        except ZeroDivisionError:
-            pass
-
+    for temp in x:
+        y[temp] = func(temp)
     return y
 
 
 # Нарисовать
 def draw(fileName):
-    file = open("{}".format(fileName), 'r')
+    file = open("Data/{}".format(fileName), 'r')
     x1 = []
     y1 = []
     for line in file:
@@ -53,7 +47,7 @@ def draw(fileName):
 
 # Записать данные в файл
 def createFile(y, name):
-    my_file = open("Data/DataFor{}".format(name), 'w')
+    my_file = open("Data/DataFor{}({})".format(name, len(y)), 'w')
     for x in y:
         my_file.write("{} {} \n".format(x, y[x]))
     my_file.close()
@@ -62,13 +56,10 @@ def createFile(y, name):
 
 
 if __name__ == '__main__':
-    # 
-    # createFile(genData(cos, 0, 4, 100, False), "Cos")
-    # createFile(genData(cos, 0, 4, 100, True), "Cos(Rand)")
-    createFile(genData(exp, -1, 1, 1000, False), "Exp")
-    # createFile(genData(exp, -10, 10, 100, True), "Exp(Rand)")
-    # createFile(genData(rtl, -10, 10, 100, False), "Rtl")
-    # createFile(genData(rtl, -10, 10, 10000, True), "Rtl(Rand)")
-    # createFile(genData(poly, -10, 10, 100, False), "Poly")
-    # createFile(genData(poly, -10, 10, 100, True), "Poly(Rand)")
-    draw("Data/DataForExp")
+    N = 0
+    while N < 50:
+        N += 10
+        createFile(genData(exp, xRange(N)), "Exp")
+        createFile(genData(cos, xRange(N)), "Cos")
+        createFile(genData(rtl, xRange(N)), "Rtl")
+        createFile(genData(poly, xRange(N)), "Poly")
