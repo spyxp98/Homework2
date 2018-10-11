@@ -7,7 +7,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 from os import path
 
-rtl = lambda x: (x**5 + 2*x**4 - 10 * x **2 + x + 1)/(x**6 - 1)
+rtl = lambda x: (x**5 + 2*x**4 - 10 * x **2 + x + 1)/(x**2 + 1)
 poly = lambda x: x**5 + 2*x**4 - 10 * x **2 + x + 1
 exp = math.exp
 cos = math.cos

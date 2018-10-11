@@ -2,10 +2,8 @@
 #       
 
 import math
-import matplotlib
-import matplotlib.pyplot as plt
 
-Rtl = lambda x: (x**5 + 2*x**4 - 10 * x **2 + x + 1)/(x**6 - 1)
+Rtl = lambda x: (x**5 + 2*x**4 - 10 * x **2 + x + 1)/(x**2 + 1)
 Poly = lambda x: x**5 + 2*x**4 - 10 * x **2 + x + 1
 Exp = math.exp
 Cos = math.cos
